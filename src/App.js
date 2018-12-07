@@ -6,19 +6,33 @@ import { database } from "./Firebase/firebase";
 
 class App extends Component {
   state = {
-    comments: []
+    comments: [],
+    isLoading: false
   };
 
   sendComment = comment => {
-    this.setState({
-      comments: [...this.state.comments, comment]
-    });
+    const id = database
+      .ref()
+      .child("comments")
+      .push().key;
+    const comments = {};
+    comments["comments/" + id] = {
+      comment
+    };
+    database.ref().update(comments);
+    // this.setState({
+    //   comments: [...this.state.comments, comment]
+    // });
   };
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     this.comments = database.ref("comments");
     this.comments.on("value", snapshot => {
-      console.log(snapshot.val());
+      this.setState({
+        comments: snapshot.val(),
+        isLoading: false
+      });
     });
   }
 
@@ -27,6 +41,7 @@ class App extends Component {
       <div className="App">
         <NewComment sendComment={this.sendComment} />
         <Comments comments={this.state.comments} />
+        {this.state.isLoading && <div>carregando...</div>}
       </div>
     );
   }
