@@ -19,9 +19,6 @@ class App extends Component {
       comment
     };
     database.ref().update(comments);
-    // this.setState({
-    //   comments: [...this.state.comments, comment]
-    // });
   };
 
   componentDidMount() {
@@ -41,7 +38,7 @@ class App extends Component {
       <div className="App">
         <NewComment sendComment={this.sendComment} />
         <Comments comments={this.state.comments} />
-        {this.state.isLoading && <div>carregando...</div>}
+        {this.state.isLoading && <p>carregando...</p>}
       </div>
     );
   }
