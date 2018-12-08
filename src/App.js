@@ -5,6 +5,8 @@ import Login from "./Components/auth/login";
 import SignUp from "./Components/auth/SignUp";
 import User from "./Components/auth/User";
 
+import "bootstrap-css-only";
+
 class App extends Component {
   state = {
     comments: [],
@@ -112,7 +114,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App container mt-3">
         {/* LOGIN */}
         {!this.state.isAuth && this.state.authScreen === "login" && (
           <Login

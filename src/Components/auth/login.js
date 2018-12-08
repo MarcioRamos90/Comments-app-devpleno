@@ -26,19 +26,40 @@ class Login extends Component {
     return error[err];
   };
 
+  handleChangeScren = e => {
+    e.preventDefault();
+    this.props.handleChangeScren("signup");
+  };
+
   render() {
-    const { isAuthError, authError, handleChangeScren } = this.props;
+    const { isAuthError, authError } = this.props;
     return (
       <div>
         <h4>Entrar</h4>
-        <input type="text" onChange={this.handleChange("email")} />
-        <input type="password" onChange={this.handleChange("passwd")} />
-        <button type="button" onClick={this.login}>
-          Entrar
-        </button>
-        <button onClick={() => handleChangeScren("signup")}>criar conta</button>
+        <form className="form-inline">
+          <input
+            type="text"
+            className="form-control mr-2"
+            onChange={this.handleChange("email")}
+          />
+          <input
+            type="password"
+            className="form-control mr-2"
+            onChange={this.handleChange("passwd")}
+          />
+          <button
+            type="button"
+            className="btn btn-primary mr-2"
+            onClick={this.login}
+          >
+            Entrar
+          </button>
+          <button className="btn" onClick={this.handleChangeScren}>
+            criar conta
+          </button>
+        </form>
         {isAuthError && (
-          <p style={{ color: "red", marginTop: 0 }}>
+          <p class="alert alert-warning mt-2">
             <strong>Erro: </strong>
             {this.handleError(authError)}
           </p>

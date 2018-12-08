@@ -26,21 +26,40 @@ class SigUpn extends Component {
     return error[err];
   };
 
+  handleChangeScren = e => {
+    e.preventDefault();
+    this.props.handleChangeScren("login");
+  };
+
   render() {
-    const { isSignUpError, signUpError, handleChangeScren } = this.props;
+    const { isSignUpError, signUpError } = this.props;
     return (
       <div>
         <h4>Criar Conta</h4>
-        <input type="text" onChange={this.handleChange("email")} />
-        <input type="password" onChange={this.handleChange("passwd")} />
-        <button type="button" onClick={this.createAccount}>
-          Criar Conta
-        </button>
-        <button onClick={() => handleChangeScren("login")}>
-          entra em conta
-        </button>
+        <form className="form-inline">
+          <input
+            type="text"
+            className="form-control mr-2"
+            onChange={this.handleChange("email")}
+          />
+          <input
+            type="password"
+            className="form-control mr-2"
+            onChange={this.handleChange("passwd")}
+          />
+          <button
+            type="button"
+            className="btn btn-primary mr-2"
+            onClick={this.createAccount}
+          >
+            Criar Conta
+          </button>
+          <button className="btn" onClick={this.handleChangeScren}>
+            entra em conta
+          </button>
+        </form>
         {isSignUpError && (
-          <p style={{ color: "red", marginTop: 0 }}>
+          <p class="alert alert-warning mt-2">
             <strong>Erro: </strong>
             {this.handleError(signUpError)}
           </p>
