@@ -5,7 +5,7 @@ class NewComment extends Component {
     newComment: ""
   };
 
-  onChange = event => {
+  handleChange = event => {
     this.setState({
       newComment: event.target.value
     });
@@ -21,7 +21,7 @@ class NewComment extends Component {
   render() {
     return (
       <div>
-        <textarea value={this.state.newComment} onChange={this.onChange} />
+        <textarea value={this.state.newComment} onChange={this.handleChange} />
         <button onClick={this.sendComment}>add</button>
       </div>
     );
